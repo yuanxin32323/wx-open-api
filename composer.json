@@ -1,0 +1,23 @@
+{
+    "name": "lisao/wx",
+    "description": "",
+    "keywords": ["wx"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lisao",
+            "email": "200831913@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "jerryhsia/weixin-msg-crypt": "dev-master",
+        "lisao/curl": "^1.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "LisaoWx\\": ["src"]
+        }
+    }
+}
