@@ -1,6 +1,6 @@
 <?php
 
-namespace LisaoWx\open\tools;
+namespace LisaoWx\tools;
 
 /**
  * error code 说明.

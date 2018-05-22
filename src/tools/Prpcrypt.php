@@ -1,8 +1,8 @@
 <?php
 
-namespace LisaoWx\open\tools;
+namespace LisaoWx\tools;
 
-use LisaoWx\open\tools\ErrorCode;
+use LisaoWx\tools\ErrorCode;
 
 /**
  * Prpcrypt class
