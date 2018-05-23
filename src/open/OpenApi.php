@@ -128,21 +128,22 @@ class OpenApi {
             throw new OpenException($result['errcode'], $result['errmsg']);
         }
         $obj = new ProgramInfoResult();
-        $obj->nick_name = $obj['authorizer_info']['nick_name'];
-        $obj->head_img = $obj['authorizer_info']['head_img'];
-        $obj->service_type_info = $obj['authorizer_info']['service_type_info'];
-        $obj->verify_type_info = $obj['authorizer_info']['verify_type_info'];
-        $obj->user_name = $obj['authorizer_info']['user_name'];
-        $obj->signature = $obj['authorizer_info']['signature'];
-        $obj->principal_name = $obj['authorizer_info']['principal_name'];
-        $obj->business_info = $obj['authorizer_info']['business_info'];
-        $obj->qrcode_url = $obj['authorizer_info']['qrcode_url'];
-        $obj->authorization_info = $obj['authorizer_info']['authorization_info'];
-        $obj->authorization_appid = $obj['authorizer_info']['authorization_appid'];
-        $obj->MiniProgramInfo = $obj['authorizer_info']['MiniProgramInfo'];
-        $obj->network = $obj['authorizer_info']['network'];
-        $obj->func_info = $obj['authorizer_info']['func_info'];
-        $obj->alias = $obj['authorizer_info']['alias'];
+        $obj->nick_name = $result['authorizer_info']['nick_name'];
+        $obj->head_img = $result['authorizer_info']['head_img'];
+        $obj->service_type_info = $result['authorizer_info']['service_type_info'];
+        $obj->verify_type_info = $result['authorizer_info']['verify_type_info'];
+        $obj->user_name = $result['authorizer_info']['user_name'];
+        $obj->signature = $result['authorizer_info']['signature'];
+        $obj->principal_name = $result['authorizer_info']['principal_name'];
+        $obj->business_info = $result['authorizer_info']['business_info'];
+        $obj->qrcode_url = $result['authorizer_info']['qrcode_url'];
+        $obj->authorization_info = $result['authorizer_info']['authorization_info'];
+        $obj->authorization_appid = $result['authorizer_info']['authorization_appid'];
+        $obj->miniprograminfo = $result['authorizer_info']['MiniProgramInfo'];
+        $obj->network = $result['authorizer_info']['network'];
+        $obj->func_info = $result['authorizer_info']['func_info'];
+        $obj->alias = $result['authorizer_info']['alias'];
+
 
         return $obj;
     }
