@@ -144,7 +144,6 @@ class OpenApi {
         $obj->func_info = $result['authorizer_info']['func_info'];
         $obj->alias = $result['authorizer_info']['alias'];
 
-
         return $obj;
     }
 

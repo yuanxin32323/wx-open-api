@@ -129,6 +129,7 @@ class OpenFunc {
         }
         return TRUE;
     }
+
     /**
      * 获取小程序业务域名
      * @return array
@@ -147,6 +148,7 @@ class OpenFunc {
         }
         return $result['webviewdomain'];
     }
+
     /**
      * 删除小程序业务域名
      * @param array $url
@@ -167,4 +169,71 @@ class OpenFunc {
         }
         return TRUE;
     }
+
+    /**
+     * 添加小程序体验账号
+     * @param string $wxid
+     * @return string 返回人员对应的唯一字符串
+     * @throws OpenException
+     */
+    public function addTestUser($wxid) {
+        $this->curl->setUrl('https://api.weixin.qq.com/wxa/bind_tester?access_token=' . $this->access_token);
+        $data = [
+            'wechatid' => $wxid
+        ];
+
+        $post = $this->curl->post(json_encode($data));
+        $result = json_decode($post, TRUE);
+        if ($result['errcode']) {
+            throw new OpenException($result['errcode'], $result['errmsg']);
+        }
+        return $result['userstr'];
+    }
+
+    /**
+     * 删除小程序体验账号
+     * @param type $userstr 返回人员对应的唯一字符串
+     * @param type $wxid 微信id
+     * @return boolean
+     * @throws OpenException
+     */
+    public function delTestUser($userstr = '', $wxid = '') {
+        $this->curl->setUrl('https://api.weixin.qq.com/wxa/unbind_tester?access_token=' . $this->access_token);
+        if ($userstr) {
+            $data = [
+                'userstr' => $userstr
+            ];
+        } else {
+            $data = [
+                'wechatid' => $wxid
+            ];
+        }
+
+        $post = $this->curl->post(json_encode($data));
+        $result = json_decode($post, TRUE);
+        if ($result['errcode']) {
+            throw new OpenException($result['errcode'], $result['errmsg']);
+        }
+        return TRUE;
+    }
+
+    /**
+     * 获取小程序体验账号列表
+     * @return array
+     * @throws OpenException
+     */
+    public function getTestUser() {
+        $this->curl->setUrl('https://api.weixin.qq.com/wxa/memberauth?access_token=' . $this->access_token);
+        $data = [
+            'action' => 'get_experiencer'
+        ];
+
+        $post = $this->curl->post(json_encode($data));
+        $result = json_decode($post, TRUE);
+        if ($result['errcode']) {
+            throw new OpenException($result['errcode'], $result['errmsg']);
+        }
+        return $result['members'];
+    }
+
 }
