@@ -96,8 +96,8 @@ class OpenApi {
      * @throws OpenException
      */
     public function refreshToken($app_id, $authorizer_refresh_token) {
-        $this->curl->setUrl('https://api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token=' . $this->config->getComponentAccessToken());
-
+        $this->curl->setUrl('https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=' . $this->config->getComponentAccessToken());
+        
         $post = $this->curl->post(json_encode([
             'component_appid' => $this->config->getAppId(),
             'authorizer_appid' => $app_id,

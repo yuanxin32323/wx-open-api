@@ -64,11 +64,11 @@ class OpenFunc {
         if ($arr['wsrequestdomain']) {
             $data['wsrequestdomain'] = $arr['wsrequestdomain'];
         }
-        if ($arr['wsrequestdomain']) {
-            $data['wsrequestdomain'] = $arr['wsrequestdomain'];
+        if ($arr['uploaddomain']) {
+            $data['uploaddomain'] = $arr['uploaddomain'];
         }
-        if ($arr['wsrequestdomain']) {
-            $data['wsrequestdomain'] = $arr['wsrequestdomain'];
+        if ($arr['downloaddomain']) {
+            $data['downloaddomain'] = $arr['downloaddomain'];
         }
         $post = $this->curl->post(json_encode($data));
         $result = json_decode($post, TRUE);
@@ -115,12 +115,18 @@ class OpenFunc {
      * @return boolean
      * @throws OpenException
      */
-    public function setBusinessDomain(array $url) {
+    public function setBusinessDomain(array $url = []) {
         $this->curl->setUrl('https://api.weixin.qq.com/wxa/setwebviewdomain?access_token=' . $this->access_token);
-        $data = [
-            'action' => 'set',
-            'webviewdomain' => $url
-        ];
+        if ($url) {
+            $data = [
+                'action' => 'set',
+                'webviewdomain' => $url
+            ];
+        } else {
+            $data = [
+                'action' => '',
+            ];
+        }
 
         $post = $this->curl->post(json_encode($data));
         $result = json_decode($post, TRUE);

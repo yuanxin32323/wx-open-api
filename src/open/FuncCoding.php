@@ -80,7 +80,53 @@ class FuncCoding {
         if ($result['errcode']) {
             throw new OpenException($result['errcode'], $result['errmsg']);
         }
-        return $result['category_list'];
+        //序列化
+        $list = $result['category_list'];
+        $return_arr = [];
+        $isset = function($id, $arr) {
+            foreach ($arr as $v) {
+                if ($v['id'] == $id) {
+                    return TRUE;
+                }
+            }
+            return FALSE;
+        };
+        //第一级
+        foreach ($list as $val) {
+            if (!$isset($val['first_id'], $return_arr['first'])) {
+                $return_arr['first'][] = [
+                    'id' => $val['first_id'],
+                    'name' => $val['first_class']
+                ];
+            }
+        }
+        //第二级
+        foreach ($list as $val) {
+            if (!$isset($val['second_id'], $return_arr['second'])) {
+                $return_arr['second'][] = [
+                    'id' => $val['second_id'],
+                    'pid' => $val['first_id'],
+                    'name' => $val['second_class']
+                ];
+            }
+        }
+        //第三级
+        foreach ($list as $val) {
+            if (!$isset($val['third_id'], $return_arr['third'])) {
+                $return_arr['third'][] = [
+                    'id' => $val['third_id'],
+                    'pid' => $val['second_id'],
+                    'name' => $val['third_class']
+                ];
+            }
+        }
+
+        return $return_arr;
+    }
+
+    //是否在数组中存在
+    private function isSetInArray($id, $a) {
+        
     }
 
     /**
@@ -109,8 +155,7 @@ class FuncCoding {
         $data = [
             'item_list' => $item_list
         ];
-
-        $post = $this->curl->post(json_encode($data));
+        $post = $this->curl->post(json_encode($data, JSON_UNESCAPED_UNICODE));
         $result = json_decode($post, TRUE);
         if ($result['errcode']) {
             throw new OpenException($result['errcode'], $result['errmsg']);
