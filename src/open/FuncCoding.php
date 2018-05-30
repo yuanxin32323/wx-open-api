@@ -202,10 +202,9 @@ class FuncCoding {
      */
     public function releaseFunc() {
         $this->curl->setUrl('https://api.weixin.qq.com/wxa/release?access_token=' . $this->access_token);
-        $data = [
-        ];
+      
 
-        $post = $this->curl->post(json_encode($data));
+        $post = $this->curl->post("{}");
         $result = json_decode($post, TRUE);
         if ($result['errcode']) {
             throw new OpenException($result['errcode'], $result['errmsg']);
