@@ -17,7 +17,7 @@ class FuncCoding {
      */
     public function __construct($authorizer_access_token) {
         $this->access_token = $authorizer_access_token;
-        $this->curl = new \lisao\curl\curl();
+        $this->curl = new \lisao\curl\curl('');
     }
 
     /**

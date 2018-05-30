@@ -17,7 +17,7 @@ class FuncCodeTpl {
      */
     public function __construct($component_access_token) {
         $this->access_token = $component_access_token;
-        $this->curl = new \lisao\curl\curl();
+        $this->curl = new \lisao\curl\curl('');
     }
 
     /**
