@@ -97,7 +97,7 @@ class OpenApi {
      */
     public function refreshToken($app_id, $authorizer_refresh_token) {
         $this->curl->setUrl('https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=' . $this->config->getComponentAccessToken());
-        
+
         $post = $this->curl->post(json_encode([
             'component_appid' => $this->config->getAppId(),
             'authorizer_appid' => $app_id,
@@ -145,6 +145,25 @@ class OpenApi {
         $obj->alias = $result['authorizer_info']['alias'];
 
         return $obj;
+    }
+
+    /**
+     * 小程序登录
+     * @param type $app_id 小程序id
+     * @param type $code 用户临时code
+     * @return array
+     * @throws OpenException
+     */
+    public function programLogin($app_id, $code) {
+        $this->curl->setUrl("https://api.weixin.qq.com/sns/component/jscode2session?appid={$app_id}&js_code={$code}&grant_type=authorization_code&component_appid=" . $this->config->getAppId() . "&component_access_token=" . $this->config->getComponentAccessToken());
+
+
+        $post = $this->curl->get();
+        $result = json_decode($post, TRUE);
+        if ($result['errcode']) {
+            throw new OpenException($result['errcode'], $result['errmsg']);
+        }
+        return $result;
     }
 
 }
